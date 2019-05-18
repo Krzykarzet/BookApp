@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Book, Publisher, LiteraryGenre, Author, Country
 
 
 # Create your views here.
@@ -9,7 +10,8 @@ def index(request):
 
 
 def booklist(request):
-    return render(request, 'booklist.html')
+    books = Book.objects.all()
+    return render(request, 'booklist.html', {'books': books})
 
 
 def newbook(request):
