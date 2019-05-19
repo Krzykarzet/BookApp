@@ -8,13 +8,20 @@
 Booklist
 
 List of all books
-{{ books }}
+{#{{ books }}#}
 <br>
-{{ books.title }}
-
+{#{{ books.title }}#}
+<br>
 
 {% for book in books %}
-    {{ book.title }}  ' ' {{ book.authors }}
+    Title: {{ book.title }}  <br>
+    Author: {% for author in book.authors.all %}
+        {{ author }}
+    {% endfor %}<br>
+    <br>
 {% endfor %}
+
+<br>
+<a href="/">Index</a>
 </body>
 </html>

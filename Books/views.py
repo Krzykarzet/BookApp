@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Book, Publisher, LiteraryGenre, Author, Country
+from .forms import BookForm
 
 
 # Create your views here.
@@ -15,7 +16,16 @@ def booklist(request):
 
 
 def newbook(request):
-    return render(request, 'newbook.html')
+    if request.method == "POST":
+        form = BookForm(request.POST)
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.save()
+            form.save_m2m()
+    else:
+        form = BookForm()
+    return render(request, 'newbook.html', {'form': form})
+    # return render(request, 'newbook.html')
 
 
 def importbook(request):

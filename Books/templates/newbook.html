@@ -8,5 +8,12 @@
 Newbook
 
 Add new book here
+
+<form method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<br>
+<a href="/">Index</a>
 </body>
 </html>
