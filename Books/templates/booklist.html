@@ -12,16 +12,35 @@ List of all books
 <br>
 {#{{ books.title }}#}
 <br>
+{##}
+{#{% for book in books %}#}
+{#    Title: {{ book.title }}  <br>#}
+{#    Author: {% for author in book.authors.all %}#}
+{#        {{ author }}#}
+{#    {% endfor %}<br>#}
+{#    Description: {{ book.description }}<br>#}
+{#    Genre: {% for genre in book.genre.all %} {{ genre }}  {% endfor %} <br>#}
+{#    <br>#}
+{#{% endfor %}#}
 
-{% for book in books %}
+<br>
+<a href="/">Index</a>
+
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button><button>Show all</button>
+
+</form>
+<hr>
+{% for book in filter.qs %}
     Title: {{ book.title }}  <br>
     Author: {% for author in book.authors.all %}
         {{ author }}
     {% endfor %}<br>
+    Description: {{ book.description }}<br>
+    Genre: {% for genre in book.genre.all %} {{ genre }}  {% endfor %} <br>
     <br>
 {% endfor %}
 
-<br>
-<a href="/">Index</a>
 </body>
 </html>

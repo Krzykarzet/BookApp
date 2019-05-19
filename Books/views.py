@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Book, Publisher, LiteraryGenre, Author, Country
 from .forms import BookForm
 import requests
+from .filters import BookFilter
 
 
 # Create your views here.
@@ -13,7 +14,8 @@ def index(request):
 
 def booklist(request):
     books = Book.objects.all()
-    return render(request, 'booklist.html', {'books': books})
+    book_filter = BookFilter(request.GET, queryset=books)
+    return render(request, 'booklist.html', {'books': books, 'filter': book_filter})
 
 
 def newbook(request):
@@ -23,6 +25,9 @@ def newbook(request):
             book = form.save(commit=False)
             book.save()
             form.save_m2m()
+            books = Book.objects.all()
+            book_filter = BookFilter(request.GET, queryset=books)
+            return render(request, 'booklist.html', {'books': books, 'filter': book_filter})
     else:
         form = BookForm()
     return render(request, 'newbook.html', {'form': form})
