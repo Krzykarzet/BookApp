@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <br>
+{#{{ items }}#}
+    <br>
+{% for item in items %}
+{#    {{ item.volumeInfo }}<br><hr>#}
+    {% for k, v in item.volumeInfo.items %}
+        {{ k }}<br>{{ v }}<br><hr>
+{#        {{ subtitle }}<br><hr>#}
+    {% endfor %}
+    <hr><br><hr>
+{% endfor %}
+</body>
+</html>

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Book, Publisher, LiteraryGenre, Author, Country
 from .forms import BookForm
+import requests
 
 
 # Create your views here.
@@ -30,3 +31,9 @@ def newbook(request):
 
 def importbook(request):
     return render(request, 'importbooks.html')
+
+
+def api_request(request):
+    response = requests.get('https://www.googleapis.com/books/v1/volumes?q=lord+of+the+rings')
+    data = response.json()
+    return render(request, 'api_data.html', {'items': data['items']})

@@ -40,7 +40,7 @@ class LiteraryGenre(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=200)
     authors = models.ManyToManyField(Author)
-    description = models.CharField(max_length=500, default=None, blank=True, null=True)
+    description = models.CharField(max_length=1000, default=None, blank=True, null=True)
     genre = models.ManyToManyField(LiteraryGenre)
     page_count = models.IntegerField(default=None, blank=True, null=True)
     published_year = models.IntegerField(default=None, blank=True, null=True)
